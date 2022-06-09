@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% include 'agenda/partials/_head.html' %}
+
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    {% block content %}{% endblock content %}
+    {% block footer %}{% endblock footer %}
+
+    <script src="{% static 'agenda/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

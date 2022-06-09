@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse('home')
+    return render(request, 'agenda/pages/home.html')
 
 
 def contact(request, id):
-    return HttpResponse('contatos')
+    return render(request, 'agenda/pages/contact.html')
