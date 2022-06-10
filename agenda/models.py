@@ -12,7 +12,7 @@ class Category(models.Model):
 class Contact(models.Model):
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60, blank=True)
-    telephone = models.CharField(max_length=11)
+    telephone = models.CharField(max_length=20)
     email = models.CharField(max_length=255, blank=True)
     created_in = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)

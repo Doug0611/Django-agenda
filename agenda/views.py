@@ -1,11 +1,16 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
 from .models import Contact
 
 
 def home(request):
-    contacts = Contact.objects.all()
+    contacts = Contact.objects.all().order_by('first_name')
+    paginator = Paginator(contacts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     return render(request, 'agenda/pages/home.html', context={
-        'contacts': contacts
+        'contacts': page_obj
     })
 
 
