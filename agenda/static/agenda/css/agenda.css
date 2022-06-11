@@ -1,0 +1,19 @@
+
+.back-home a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.back-home a svg{
+    width: 1rem;
+    height: 1rem;
+    color: #ffff;
+}
+
+.form-search-contact .btn svg{
+    width: 1.2rem;
+    height: 1.1rem;
+    color: #ffff;
+}
