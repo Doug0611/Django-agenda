@@ -15,9 +15,10 @@ class ContactAdmin(admin.ModelAdmin):
         'last_name',
         'telephone',
         'email',
-        'category'
+        'category',
+        'to_show'
         ]
-
+    list_editable = ['to_show', 'telephone']
     list_display_links = ['id', 'first_name', 'last_name']
     list_per_page = 10
     search_fields = ['first_name', 'last_name', 'telephone']

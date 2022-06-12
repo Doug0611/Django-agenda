@@ -17,7 +17,13 @@ class Contact(models.Model):
     created_in = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+        Category, on_delete=models.SET_NULL, null=True
+    )
+    profile_picture = models.ImageField(
+        blank=True,
+        upload_to='agenda/img/%Y/%m/%d'
+    )
+    to_show = models.BooleanField(default=True)
 
     def __str__(self):
         return self.first_name
