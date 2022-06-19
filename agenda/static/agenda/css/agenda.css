@@ -17,3 +17,12 @@ svg{
     height: 1.1rem;
     color: #ffff;
 }
+
+.messages-alert {
+    position: absolute;
+    z-index: 1;
+    top: 40px;
+    left: 30%;
+    text-align: center;
+    width: 40%;
+}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'agenda.apps.AgendaConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
