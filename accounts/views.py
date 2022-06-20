@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from accounts.forms import AccountForm
+from accounts.forms import UserAccountForm
+from django.contrib.auth.models import User
 # from django.contrib import messages
 
 
@@ -17,13 +18,26 @@ def logout(request):
 
 def create_account(request):
     if request.method == 'POST':
-        account = AccountForm(request.POST)
+        account = UserAccountForm(request.POST)
 
         if account.is_valid():
-            return redirect('accounts:login')
+            first_name = account.cleaned_data['first_name']
+            last_name = account.cleaned_data['last_name']
+            username = account.cleaned_data['username']
+            email = account.cleaned_data['email']
+            password = account.cleaned_data['password']
 
+            User.objects.create_user(
+                    first_name=first_name,
+                    last_name=last_name,
+                    username=username,
+                    email=email,
+                    password=password
+                )
+
+            return redirect('accounts:login')
     else:
-        account = AccountForm()
+        account = UserAccountForm()
 
     return render(request, 'accounts/pages/create_account.html', context={
         'form': account

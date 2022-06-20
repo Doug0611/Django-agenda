@@ -1,7 +1,11 @@
 from django import forms
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
 
 
-class AccountForm(forms.Form):
+class UserAccountForm(forms.Form):
+    error_css_class = 'text-danger'
     first_name = forms.CharField(
         max_length=30,
         widget=forms.TextInput(
@@ -46,8 +50,39 @@ class AccountForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'title': 'crie uma senha de sua preferencia',
-                'onkeyup': 'isValid()',
-                'pattern': '(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
+                'pattern': r'(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
             }
         )
     )
+    password_confirm = forms.CharField(
+        min_length=6,
+        max_length=20,
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'title': 'informe a senha criada',
+                'pattern': r'(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}'
+            }
+        )
+    )
+
+    def clean_username(self):
+        user = self.cleaned_data['username']
+
+        if User.objects.filter(username=user).exists():
+            raise forms.ValidationError(_('usuário já está sendo utilizado.'))
+        return user
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(_('email já está sendo utilizado.'))
+        return email
+
+    def clean_password_confirm(self):
+        data = self.cleaned_data
+
+        if data['password'] != data['password_confirm']:
+            raise forms.ValidationError(_('as senhas não conferem.'))
+        return data['password_confirm']
