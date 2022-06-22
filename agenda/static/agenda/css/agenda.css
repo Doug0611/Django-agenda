@@ -26,3 +26,13 @@ svg{
     text-align: center;
     width: 40%;
 }
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand img {
+    width: 30px;
+    height: 30px;
+}

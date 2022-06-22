@@ -1,0 +1,14 @@
+<h1 class="mt-4">Olá, {{ user.first_name }} {{ user.last_name }}.</h1>
+<div class="action-btn">
+    <h4 class="mb-3 text-primary lead">aqui estão listado seus contatos.</h4>
+    <div class="action">
+        <button type="button" class="btn btn-primary bg-gradiente btn-sm shadow" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="text-white fa-solid fa-plus"></i>
+            <span class="text-white">adicionar contato</span>
+        </button>
+        <a class="btn btn-dark bg-gradiente btn-sm ms-3 shadow" href="{% url 'agenda:home' %}">
+            <i class="text-white fa-solid fa-list"></i>
+            <span class="text-white">todos contatos</span>
+        </a>
+    </div>
+</div>

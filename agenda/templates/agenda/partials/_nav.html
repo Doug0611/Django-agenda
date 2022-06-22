@@ -1,10 +1,20 @@
+{% load static %}
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'agenda:home' %}">Agenda</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+    <div class="container-sm">
+        <a class="navbar-brand" href="{% url 'agenda:home' %}">
+            <img src="{% static 'agenda/img/telefone.svg' %}" alt="">
+            Agenda
+        </a>
+
+        <form  action="{% url 'agenda:search' %}" method="GET" class="d-flex" role="search">
+            <input class="form-control me-2" type="search" value="{{ request.GET.term }}"name="term" placeholder="buscar contato" aria-label="Search">
+            <button class="btn btn-primary bg-gradient d-flex justify-content-evenly align-items-center" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                <span class="text-white ms-1">search</span>
+            </button>
+        </form>
     </div>
 </nav>

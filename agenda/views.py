@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.db.models.functions import Concat
 from django.contrib import messages
 from .models import Contact
+from .forms import NewContactForm
 
 
 def home(request):
@@ -15,9 +16,33 @@ def home(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    form = NewContactForm()
+
     return render(request, 'agenda/pages/home.html', context={
-        'contacts': page_obj
-    })
+            'contacts': page_obj,
+            'form': form
+        }
+    )
+
+
+def add_contact(request):
+    if request.method == 'POST':
+        form = NewContactForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Contato %s %s adicionado com sucesso.' % (
+                        first_name,
+                        last_name
+                    )
+            )
+            return redirect('agenda:home')
 
 
 def search(request):
@@ -39,7 +64,6 @@ def search(request):
         Q(telephone__icontains=term),
         to_show=True
     )
-
     paginator = Paginator(contacts, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -66,3 +90,22 @@ def contact(request, id_contact):
     return render(request, 'agenda/pages/contact.html', context={
         'contact': contact
     })
+
+
+def delete(request, id_contact_delete):
+    contact_delete = get_object_or_404(Contact, id=id_contact_delete)
+    contact_delete.delete()
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        'Contato %s %s apagado com sucesso.' % (
+            contact_delete.first_name,
+            contact_delete.last_name
+        )
+    )
+
+    return redirect('agenda:home')
+
+
+def update(request, id_contact_update):
+    ...

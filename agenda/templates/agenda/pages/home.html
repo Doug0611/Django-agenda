@@ -1,6 +1,5 @@
 {% extends 'global/base.html' %}
 
-
 {% block title %}Agenda{% endblock title %}
 
 {% block content %}
@@ -8,15 +7,14 @@
 {% include 'agenda/partials/_nav.html' %}
 
 <!-- Page Content -->
-<div class="container">
+<div class="container-md">
     <div class="row">
         <div class="col-lg-12">
-        <h1 class="mt-5 text-center">Minha agenda</h1>
 
+        {% include 'agenda/partials/_btn_action.html' %}
         {% include 'agenda/partials/_alerts.html' %}
+        {% include 'agenda/partials/_modal_add.html' %}
 
-        {% include 'agenda/partials/_search.html' %}
-        
         <table class="table table-hover">
             <thead>
                 <tr class="table-dark shadow">
@@ -34,7 +32,9 @@
                         <td>
                             <a href="{% url 'agenda:contact' contact.id %}">{{ contact.first_name | title }}</a>
                         </td>
-                        <td>{{ contact.last_name | title }}</td>
+                        <td>
+                            <a href="{% url 'agenda:contact' contact.id %}">{{ contact.last_name | title }}</a>
+                        </td>
                         <td>{{ contact.email }}</td>
                         <td>{{ contact.telephone }}</td>
                         <td>{{ contact.category }}</td>
@@ -49,6 +49,7 @@
     </div>
 </div>
 {% endblock content %}
+
 {% block footer %}
 <footer>
     <span>powered by Django</span>

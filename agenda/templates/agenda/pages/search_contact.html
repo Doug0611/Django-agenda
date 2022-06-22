@@ -10,39 +10,37 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-
-        <h1 class="mt-5 text-center">Minha agenda</h1>
-
-        {% include 'agenda/partials/_alerts.html' %}
-        {% include 'agenda/partials/_search.html' %}
-        
-        <table class="table table-hover">
-            <thead>
-                <tr class="table-dark shadow">
-                    <th>Nome</th>
-                    <th>Sobrenome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Categoria</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for contact in contacts %}
-                {% if contact.to_show %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'agenda:contact' contact.id %}">{{ contact.first_name | title }}</a>
-                        </td>
-                        <td>{{ contact.last_name | title }}</td>
-                        <td>{{ contact.email }}</td>
-                        <td>{{ contact.telephone }}</td>
-                        <td>{{ contact.category }}</td>
+            {% include 'agenda/partials/_btn_action.html' %}
+            {% include 'agenda/partials/_alerts.html' %}
+       
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-dark shadow">
+                        <th>Nome</th>
+                        <th>Sobrenome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Categoria</th>
                     </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                {% for contact in contacts %}
+                    {% if contact.to_show %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'agenda:contact' contact.id %}">{{ contact.first_name | title }}</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'agenda:contact' contact.id %}">{{ contact.last_name | title }}</a>
+                            </td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.telephone }}</td>
+                            <td>{{ contact.category }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
         {% include 'agenda/partials/_pagination.html' %}
     </div>

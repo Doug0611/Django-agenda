@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary" id="exampleModalLabel">Excluir contato</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">
+                    deseja deletar o contato <span class="text-primary">{{ contact.first_name }} {{ contact.last_name }}</span> ?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger bg-gradient shadow" data-bs-dismiss="modal">Não</button>
+                <a href="{% url 'agenda:delete' contact.id %}">
+                    <button type="button" class="btn btn-success bg-gradient shadow">Sim</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
