@@ -6,12 +6,15 @@
 <!-- Page Content -->
 <div class="container">
     <div class="row">
+
+        {% include 'agenda/partials/_alerts.html' %}
+
         <div class="col-lg-12">
             <div class="contact-name">
                 <h1 class="mt-5">{{ contact.first_name | title }} {{ contact.last_name | title }}</h1>       
             </div>
             {% if contact.profile_picture %}
-                <img src="{{ contact.profile_picture.url }}" class="img-thumbnail rounded shadow mb-3" alt="image contact profile">
+                <img src="{{ contact.profile_picture.url }}" class="img-thumbnail image-profile rounded shadow mb-3" alt="image contact profile">
             {% endif %}
 
             <dl>
@@ -41,16 +44,17 @@
                         <i class="text-white fa-solid fa-arrow-left"></i>
                         <span class="text-white">back</span> 
                     </a>
-                    <a class="ms-3 btn btn-primary bg-gradient shadow" href=""> 
+                    <button type="button" class="ms-3 btn btn-primary bg-gradient shadow" data-bs-toggle="modal" href="#exampleModalToggle" role="button"> 
                         <i class="text-dank fa-solid fa-user-pen"></i>
                         <span class="text-white">to edit</span>
-                    </a>
+                    </button>
                     <button type="button" class="btn btn-danger ms-3 bg-gradient shadow" data-bs-toggle="modal" data-bs-target="#exampleModal">    
                         <i class="text-white fa-solid fa-trash-can"></i>
                         <span class="text-white">delete</span>
                     </button>
                 </dd>
             </dl>
+            {% include 'agenda/partials/_modal_to_edit.html' %}
             {% include 'agenda/partials/_modal_delete.html' %}
         </div>
     </div>

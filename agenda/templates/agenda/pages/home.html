@@ -13,7 +13,6 @@
 
         {% include 'agenda/partials/_btn_action.html' %}
         {% include 'agenda/partials/_alerts.html' %}
-        {% include 'agenda/partials/_modal_add.html' %}
 
         <table class="table table-hover">
             <thead>
@@ -27,6 +26,7 @@
             </thead>
             <tbody>
             {% for contact in contacts %}
+                {% include 'agenda/partials/_modal_add.html' %}
                 {% if contact.to_show %}
                     <tr>
                         <td>

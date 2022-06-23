@@ -87,9 +87,12 @@ def search(request):
 
 def contact(request, id_contact):
     contact = get_object_or_404(Contact, id=id_contact)
+    form = NewContactForm(instance=contact)
     return render(request, 'agenda/pages/contact.html', context={
-        'contact': contact
-    })
+            'contact': contact,
+            'form': form
+        }
+    )
 
 
 def delete(request, id_contact_delete):
@@ -103,9 +106,23 @@ def delete(request, id_contact_delete):
             contact_delete.last_name
         )
     )
-
     return redirect('agenda:home')
 
 
 def update(request, id_contact_update):
-    ...
+    if request.method == 'POST':
+        contact = get_object_or_404(Contact, id=id_contact_update)
+        form = NewContactForm(
+                request.POST,
+                request.FILES or None,
+                instance=contact
+            )
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                'Contato atualizado com sucesso.'
+            )
+            return redirect('agenda:contact', contact.id)
